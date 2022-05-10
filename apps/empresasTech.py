@@ -2,18 +2,9 @@ from dash import html,dcc
 import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
-import pathlib
+import bd
 
-rows = 100000
-
-PATH = pathlib.Path(__file__).parent
-PATH_FOLDER = PATH.joinpath('../datasets').resolve()
-data = PATH_FOLDER.joinpath('empresasTech.csv')
-
-df = pd.read_csv(data)
-df['cantidad'] = 1
-sector = df.groupby(['sector'])['cantidad'].sum().reset_index(name='cantidad')
-origen = df.groupby(['origen'])['cantidad'].sum().reset_index(name='cantidad')
+df,sector,origen = bd.empresasTech()
 
 colors = {
     'background': '#111111',
